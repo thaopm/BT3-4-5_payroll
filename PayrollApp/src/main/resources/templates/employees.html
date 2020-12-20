@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Payroll App</title>
+</head>
+<body>
+	<p>Hello</p>
+	<div>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>DOB</th>
+				<th>Role</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+			<tr th:each="employee: ${employees}">
+				<td th:text="${employee.name}" />
+				<td th:text="${employee.dob}" />
+				<td th:text="${employee.role}" />
+				<td th:text="${employee.startdate}" />
+				<td th:text="${employee.salary}" />
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
