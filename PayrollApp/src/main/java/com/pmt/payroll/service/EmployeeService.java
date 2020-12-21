@@ -1,48 +1,40 @@
 package com.pmt.payroll.service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
-
-import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.pmt.payroll.model.Employee;
+import com.pmt.payroll.repository.EmployeeRepository;
 import com.pmt.payroll.util.DateUtil;
 
 @Service
 public class EmployeeService {
 
-	public List<Employee> getEmployeesFromCSV() throws FileNotFoundException, IOException {
-		List<Employee> employees = new ArrayList<Employee>();
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
-		File file = ResourceUtils.getFile("classpath:data/employee.csv");
+	/**
+	 * Get employee list and process Employee Info
+	 * 
+	 * @return 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public List<Employee> getEmployees() throws FileNotFoundException, IOException {
+		List<Employee> employees = employeeRepository.getEmployeesFromCSV();
 
-		CsvMapper mapper = new CsvMapper(); // Dùng để ánh xạ cột trong CSV với từng trường trong POJO
-		CsvSchema schema = CsvSchema.emptySchema().withHeader(); // Dòng đầu tiên sử dụng làm Header
-		// setter required
-		ObjectReader oReader = mapper.readerFor(Employee.class).with(schema); // Cấu hình bộ đọc CSV phù hợp với
-																				// kiểu Car.class
-		Reader fileReader = new FileReader(file);
-		MappingIterator<Employee> iterator = oReader.readValues(fileReader); // Iterator đọc từng dòng trong file
-		while (iterator.hasNext()) {
-			Employee employee = iterator.next();
+		employees.forEach(employee -> {
 			employee.setAge(calculateAge(employee.getDob()));
 			employee.setWorkingTime(calculateWorkingTime(employee.getStartdate()));
 			employee.setCurrentSalary(calculateCurrentSalary(employee.getStartdate(), employee.getSalary()));
-			employees.add(employee);
-		}
+		});
+
 		return employees;
 	}
 
