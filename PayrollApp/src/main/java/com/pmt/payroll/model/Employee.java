@@ -10,17 +10,11 @@ public class Employee {
 	private String startdate;
 	private int salary;
 	private int age;
+	private String workingTime;
+	private int currentSalary;
 
 	public Employee() {
 		super();
-	}
-
-	public Employee(String name, String dob, String role, String startdate, int salary) {
-		this.name = name;
-		this.dob = dob;
-		this.role = role;
-		this.startdate = startdate;
-		this.salary = salary;
 	}
 
 	public void setName(String name) {
@@ -43,14 +37,6 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -71,10 +57,28 @@ public class Employee {
 		return salary;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [name=" + name + ", dob=" + dob + ", role=" + role + ", startdate=" + startdate + ", salary="
-				+ salary + "]";
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getWorkingTime() {
+		return workingTime;
+	}
+
+	public void setWorkingTime(String workingTime) {
+		this.workingTime = workingTime;
+	}
+
+	public int getCurrentSalary() {
+		return currentSalary;
+	}
+
+	public void setCurrentSalary(int currentSalary) {
+		this.currentSalary = currentSalary;
 	}
 
 }

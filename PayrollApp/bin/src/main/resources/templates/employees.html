@@ -5,18 +5,15 @@
 <title>Payroll App</title>
 </head>
 <body>
-	<h3>Payroll</h3>
+	<p>Hello</p>
 	<div>
 		<table>
 			<tr>
 				<th>Name</th>
 				<th>DOB</th>
 				<th>Role</th>
-				<th>Start Date</th>
+				<th>Start date</th>
 				<th>Salary</th>
-				<th>Age</th>
-				<th>Working Time</th>
-				<th>Current Salary</th>
 			</tr>
 			<tr th:each="employee: ${employees}">
 				<td th:text="${employee.name}" />
@@ -24,9 +21,6 @@
 				<td th:text="${employee.role}" />
 				<td th:text="${employee.startdate}" />
 				<td th:text="${employee.salary}" />
-				<td th:text="${employee.age}" />
-				<td th:text="${employee.workingTime}" />
-				<td th:text="${employee.CurrentSalary}" />
 			</tr>
 		</table>
 	</div>

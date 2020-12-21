@@ -8,13 +8,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pmt.payroll.model.Employee;
 import com.pmt.payroll.service.EmployeeService;
 
 @Controller
-//@RequestMapping("/employee")
 public class PayrollController {
 
 	private EmployeeService employeeService = new EmployeeService();
@@ -23,7 +21,6 @@ public class PayrollController {
 	public String showEmployees(Model model) {
 		List<Employee> employees = null;
 		String message = "";
-		String view = "";
 		try {
 			employees = employeeService.getEmployeesFromCSV();
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
